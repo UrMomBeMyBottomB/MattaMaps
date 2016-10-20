@@ -9,7 +9,7 @@ To get this working.
     <resources>
         <string name="api_key"> </string>
     </resources>
-
+    
 3. Enter your API key inside the string tag.
 4. Build project and run on a physical android devilce.
 
