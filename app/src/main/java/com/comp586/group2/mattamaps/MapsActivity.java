@@ -12,18 +12,33 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    /* Google Map Object */
     private GoogleMap mMap;
+
+    /* Default coordinates for CSUN campus */
+    private static final double DEFAULT_LAT  = 34.240033;
+    private static final double DEFAULT_LNG = -118.527569;
+
+    /* Zoom bounds for the map view */
+    private static final double MAX_ZOOM = 0;
+    private static final double MIN_ZOOM = 0;
+
+    /* Longitude and lattitude bounds for map view */
+    private static final double MIN_LAT = 0;
+    private static final double MIN_LNG = 0;
+    private static final double MAX_LAT = 0;
+    private static final double MAX_LNG = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        this.setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
     /**
      * Manipulates the map once available.
@@ -36,11 +51,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        this.mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Set the csun Lattitude and longitude object */
+        LatLng csun = new LatLng(this.DEFAULT_LAT, this.DEFAULT_LNG);
+
+        this.mMap.addMarker(new MarkerOptions().position(csun).title("Marker at CSUN"));
+        this.mMap.moveCamera(CameraUpdateFactory.newLatLng(csun));
+
+        //this.mMap.setLatLngBoundsForCameraTarget();
     }
 }
