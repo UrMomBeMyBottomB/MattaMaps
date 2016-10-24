@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -16,12 +17,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     /* Default coordinates for CSUN campus */
-    private static final double DEFAULT_LAT  = 34.240033;
+    private static final double DEFAULT_LAT = 34.240033;
     private static final double DEFAULT_LNG = -118.527569;
 
+    private static final float DEFAULT_ZOOM = (float)14.50;
+
     /* Zoom bounds for the map view */
-    private static final double MAX_ZOOM = 0;
-    private static final double MIN_ZOOM = 0;
+    private static final float MIN_ZOOM = 10;
+    private static final float MAX_ZOOM = 20;
 
     /* Longitude and lattitude bounds for map view */
     private static final double MIN_LAT = 0;
@@ -56,9 +59,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Set the csun Lattitude and longitude object */
         LatLng csun = new LatLng(this.DEFAULT_LAT, this.DEFAULT_LNG);
 
+        LatLng neBounds = new LatLng(this.MIN_LAT, this.MIN_LNG);
+        LatLng swBounds = new LatLng(this.MAX_LAT, this.MAX_LNG);
+
+        LatLngBounds csunBounds = new LatLngBounds(neBounds, swBounds);
+
         this.mMap.addMarker(new MarkerOptions().position(csun).title("Marker at CSUN"));
         this.mMap.moveCamera(CameraUpdateFactory.newLatLng(csun));
 
-        //this.mMap.setLatLngBoundsForCameraTarget();
+        //this.mMap.setLatLngBoundsForCameraTarget(csunBounds);
+
+        this.mMap.moveCamera(CameraUpdateFactory.zoomTo(this.DEFAULT_ZOOM));
+       // this.mMap.setPadding(10,0,0,0);
     }
 }
