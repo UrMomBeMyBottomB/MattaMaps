@@ -70,6 +70,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //this.mMap.setLatLngBoundsForCameraTarget(csunBounds);
 
         this.mMap.moveCamera(CameraUpdateFactory.zoomTo(this.DEFAULT_ZOOM));
-       // this.mMap.setPadding(10,0,0,0);
+        this.mMap.setPadding(100,0,0,0);
     }
 }
